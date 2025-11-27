@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Suzy — SmartPrep | Documentation</title>
+<link rel="icon" href="favicon.ico" />
+
+<style>
+  :root{
+    --bg: #0f1724;
+    --card: #0b1220;
+    --card-2: rgba(255,255,255,0.02);
+    --muted: #9aa6bf;
+    --accent: #7dd3fc;
+    --accent-2: #60a5fa;
+    --glass: rgba(255,255,255,0.05);
+    --radius: 12px;
+    --container-width: 1100px;
+  }
+
+  html,body{
+    height:100%; margin:0;
+    font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background-color:var(--bg);
+    color:#e6eef8;
+    padding:28px;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .container{
+    max-width:var(--container-width);
+    margin:0 auto;
+    display:grid;
+    gap:20px;
+  }
+
+  /* HEADER */
+  header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:8px}
+  .brand{display:flex;gap:14px;align-items:center}
+  .logo{
+    width:56px;height:56px;border-radius:10px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:20px;color:#06283d;
+    box-shadow:0 6px 18px rgba(10,20,30,0.45);
+  }
+  h1{margin:0;font-size:20px}
+  .subtitle{font-size:13px;color:var(--muted);margin-top:4px}
+
+  .open-repo{
+    background:var(--glass);
+    border:1px solid rgba(255,255,255,0.08);
+    padding:10px 12px;border-radius:10px;color:inherit;
+    text-decoration:none;font-weight:600;font-size:13px;
+  }
+
+  /* HERO */
+  .hero{
+    background:var(--card-2);
+    border-radius:var(--radius);
+    padding:20px;
+    display:grid;
+    grid-template-columns:1fr 360px;
+    gap:18px;
+    align-items:center;
+  }
+  .hero h2{margin:0;color:var(--accent);font-size:24px}
+  .hero p{color:var(--muted);margin-top:8px;line-height:1.45}
+
+  /* CARD */
+  .card{
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:16px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.4);
+  }
+
+  /* FEATURES: improved alignment */
+  .section-title{color:var(--accent);margin:0 0 8px 0}
+  .features-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+    margin-top:12px;
+  }
+
+  .feature-card{
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+    border-radius:10px;
+    padding:14px;
+    min-height:96px;
+    box-shadow: inset 0 -1px 0 rgba(255,255,255,0.01);
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .feature-card:hover{ transform:translateY(-4px); box-shadow:0 8px 30px rgba(0,0,0,0.45); }
+
+  .feature-icon{
+    width:64px;height:64px;border-radius:12px;
+    background:var(--glass);
+    display:flex;align-items:center;justify-content:center;font-size:22px;
+    flex-shrink:0;color:#051725;font-weight:700;
+  }
+
+  .feature-body h4{ margin:0;font-size:16px; color:#e6eef8 }
+  .feature-body p{ margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.45 }
+
+  /* SMALL HELPERS */
+  .muted{color:var(--muted)}
+  pre{margin:0;background:rgba(0,0,0,0.45);padding:14px;border-radius:10px;overflow:auto;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;font-size:13px;color:#dbeafe}
+  code{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace}
+
+  /* DEMO */
+  .demo-wrap{display:grid;gap:12px}
+
+  /* ARCHITECTURE */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .list-compact li{margin-bottom:6px}
+
+  /* TEAM */
+  .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+  .team-card{display:flex;gap:12px;background:rgba(255,255,255,0.03);border-radius:10px;padding:12px;align-items:center}
+  .avatar{min-width:60px;height:60px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(2,6,23,0.6)}
+  .team-info h4{margin:0;font-size:15px}
+  .team-info p{margin:6px 0 0;color:var(--muted);font-size:13px}
+
+  footer{text-align:center;color:var(--muted);margin-top:18px;padding-bottom:12px}
+
+  /* RESPONSIVE */
+  @media (max-width:980px){
+    .hero{grid-template-columns:1fr}
+    .features-grid{grid-template-columns:1fr}
+    .two-col{grid-template-columns:1fr}
+    .team-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <div class="logo">Su</div>
+      <div>
+        <h1>Suzy — SmartPrep</h1>
+        <div class="subtitle">AI study companion — notes, flashcards, mock tests & analytics</div>
+      </div>
+    </div>
+
+    <a class="open-repo" href="https://github.com/Ajayanands/Suzy" target="_blank" rel="noopener">Open repository</a>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero card" aria-labelledby="heroTitle">
+    <div>
+      <h2 id="heroTitle">Smart, simple, study — Suzy</h2>
+      <p>
+        Suzy is an end-to-end educational web app built with <strong>ASP.NET Core Razor Pages</strong> and <strong>EF Core</strong>.
+        It helps students manage notes, auto-generate flashcards using a GenAI (Gemini) integration, create subject-wise mock tests, and track progress using analytics.
+      </p>
+      <p class="muted" style="margin-top:8px">This documentation summarizes the project structure, how Suzy works, installation, and the specific contributions by the team — including the backend & GenAI work by Ajay.</p>
+    </div>
+
+    <!-- HERO IMAGE -->
+    <aside style="border-radius:12px;overflow:hidden" class="card">
+      <img src="media/SuzyLandingPage.png" alt="Suzy Landing Page" style="width:100%;height:auto;display:block">
+    </aside>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="card" id="features">
+    <h3 class="section-title">Core Features</h3>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📁</div>
+        <div class="feature-body">
+          <h4>Note Management</h4>
+          <p class="muted">Upload PDFs and text notes, tag them by subject/topic using a <code>Tag</code> + <code>NoteTag</code> pattern (so <code>Note.cs</code> remains untouched). Supports file storage and metadata search.</p>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🧠</div>
+        <div class="feature-body">
+          <h4>Flashcards (GenAI)</h4>
+          <p class="muted">Server-side GenAI integration (Gemini) that chunks document text, builds prompts, and generates validated Q/A pairs saved as flashcards. Pipeline includes prompt construction, parsing, and output sanitization.</p>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">✍️</div>
+        <div class="feature-body">
+          <h4>Mock Tests</h4>
+          <p class="muted">Upload past questions and generate timed mock tests categorized by subject and difficulty. Results and analytics saved per user for review.</p>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <div class="feature-body">
+          <h4>Analytics & Study Sessions</h4>
+          <p class="muted">Track progress across topics, view weak areas, and use spaced repetition for efficient review sessions.</p>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <div class="feature-body">
+          <h4>Chat with Suzy</h4>
+          <p class="muted">Interactive chatbot that analyzes stored mock-test and study-session data (TestResult and SessionLog) and returns concise progress summaries and insights derived from that data.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE & WORKFLOW -->
+  <section class="card" id="architecture">
+    <h3 class="section-title">Architecture & How it works</h3>
+
+    <div class="two-col" style="margin-top:10px">
+      <div>
+        <h4 style="margin-bottom:6px">High-level components</h4>
+        <ul class="list-compact muted">
+          <li><strong>Razor Pages</strong> — UI layer (.cshtml + PageModel) for Notes, Flashcards, Mock tests, Auth, and Chat endpoints.</li>
+          <li><strong>EF Core</strong> — Data access (AppDbContext), models for Note, Tag, NoteTag, Flashcard, User, TestResult, SessionLog.</li>
+          <li><strong>GenAI Service</strong> — Server-side wrapper for Gemini: prompt building, chunking, response parsing, validation, and chat orchestration.</li>
+          <li><strong>Storage</strong> — local file storage (uploads/) or cloud blob; DB for metadata and logs.</li>
+          <li><strong>Auth</strong> — ASP.NET Identity for local accounts; scaffolded hooks for external providers.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="margin-bottom:6px">Typical workflow (user)</h4>
+        <ol class="muted">
+          <li>Sign in → Upload a note (PDF/text).</li>
+          <li>Tag the note (subject / topic) — saved via Tag & NoteTag.</li>
+          <li>Open the Flashcards page → choose a document → system chunks text and calls GenAI.</li>
+          <li>GenAI returns Q/A pairs → server validates → saved as Flashcards.</li>
+          <li>Create or take mock tests; results are saved per user.</li>
+          <li>Open Chat with Suzy → ask for progress (e.g., “How am I improving?”) → Chat service reads TestResult & SessionLog, computes trends, and replies with a concise summary and suggestions.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMO -->
+  <section class="card" id="demo">
+    <h3 class="section-title">Demo</h3>
+
+    <div class="demo-wrap" style="margin-top:10px">
+      <video controls preload="metadata" playsinline style="width:100%;max-height:420px;border-radius:10px;background:#000">
+        <source src="media/demo.mp4" type="video/mp4">
+        <p class="muted">Demo video not found — add <code>media/demo.mp4</code> to the repository (rename your local file to demo.mp4).</p>
+      </video>
+
+      <div class="muted" style="font-size:13px">Tip: If the video is large, use <code>ffmpeg</code> to re-encode with <code>-crf 28</code> to hit a ~10MB target while preserving acceptable quality.</div>
+    </div>
+  </section>
+
+  <!-- PREREQUISITES & INSTALL -->
+  <section class="card" id="getting-started">
+    <h3 class="section-title">Prerequisites & Installation</h3>
+
+    <h4 style="margin-top:8px">Prerequisites</h4>
+    <ul class="muted" style="margin-top:6px">
+      <li>.NET 6.0 SDK or later</li>
+      <li>Visual Studio 2022 or VS Code</li>
+      <li>Git</li>
+    </ul>
+
+    <h4 style="margin-top:10px">Installation</h4>
+    <p class="muted" style="margin-top:6px">Clone the repository</p>
+    <pre><code>git clone https://github.com/maihazem607/Suzy-Study-Partner.git
+cd Suzy</code></pre>
+
+    <p class="muted" style="margin-top:8px">Install dependencies</p>
+    <pre><code>dotnet restore</code></pre>
+
+    <p class="muted" style="margin-top:8px">Set up the database</p>
+    <pre><code>dotnet ef database update</code></pre>
+
+    <p class="muted" style="margin-top:8px">Configure AI Service</p>
+    <pre><code>Add your Google Gemini API key to suzy-gemini-key.json
+# or configure via the website settings page
+Update appsettings.json with your configuration</code></pre>
+
+    <p class="muted" style="margin-top:8px">Run the application</p>
+    <pre><code>dotnet run</code></pre>
+
+    <p class="muted" style="margin-top:8px">Access the application</p>
+    <pre><code>Open your browser and navigate to http://localhost:5000</code></pre>
+  </section>
+
+  <!-- CODE SNIPPETS -->
+  <section class="card" id="code-snippets">
+    <h3 class="section-title">Selected code snippets</h3>
+
+    <h4 style="margin-top:8px">EF Core Tag & NoteTag (keep Note.cs unchanged)</h4>
+    <pre><code>public class Tag {
+  public int Id { get; set; }
+  public string Name { get; set; }
+  public List&lt;NoteTag&gt; NoteTags { get; set; }
+}
+public class NoteTag {
+  public int NoteId { get; set; }
+  public int TagId { get; set; }
+  public Note Note { get; set; }
+  public Tag Tag { get; set; }
+}</code></pre>
+
+    <h4 style="margin-top:12px">Flashcard generation (server-side pseudocode)</h4>
+    <pre><code>public async Task&lt;List&lt;Flashcard&gt;&gt; GenerateFlashcardsFromText(string text) {
+  var chunks = ChunkText(text, maxChars: 3000);
+  var prompt = BuildFlashcardPrompt(chunks);
+  var response = await _geminiClient.GenerateAsync(prompt);
+  var qaPairs = ParseAndValidate(response);
+  SaveFlashcards(qaPairs, documentId);
+  return qaPairs;
+}</code></pre>
+  </section>
+
+  <!-- MY CONTRIBUTION -->
+  <section class="card" id="contribution">
+    <h3 class="section-title">My contribution — Ajay Anand S (what I built)</h3>
+
+    <p class="muted" style="margin-top:8px">I (Ajay) implemented the backend and GenAI integration for the entire application. Highlights:</p>
+
+    <ul class="muted list-compact" style="margin-top:8px">
+      <li><strong>Backend (full):</strong> Implemented server-side Razor Page handlers, services, and APIs for Notes, Flashcards, Mock Tests, Chat, and user management.</li>
+      <li><strong>EF Core data models & migrations:</strong> Designed Tag & NoteTag entities, DbContext updates, and database migrations.</li>
+      <li><strong>File uploads & storage:</strong> Secure upload pipeline, file validation, and storage paths (uploads/ or media/).</li>
+      <li><strong>GenAI integration:</strong> Built the server-side GenAI service (Gemini wrapper) — prompt engineering, chunking, response parsing, and output validation before saving flashcards and powering the chat.</li>
+      <li><strong>Flashcard pipeline:</strong> Chunking, prompt construction, parsing, validation, and DB persistence for Q/A pairs.</li>
+      <li><strong>Mock-test engine:</strong> APIs and logic to create timed tests, scoring, and storing result analytics (used by chat to compute progress).</li>
+      <li><strong>Chat orchestration:</strong> Implemented endpoints and server logic so the chat can read TestResult & SessionLog, compute trends, and respond with user-specific progress summaries.</li>
+      <li><strong>Authentication:</strong> Configured ASP.NET Identity for local accounts and prepared scaffold hooks for external providers (Google/GitHub).</li>
+      <li><strong>Validation & moderation:</strong> Server-side checks to filter or flag low-quality/unsafe GenAI outputs and allow manual review/flagging by users.</li>
+      <li><strong>Deployment & DB scripts:</strong> DB migration scripts, basic hosting/run instructions for local and simple server deployment.</li>
+    </ul>
+
+    <p class="muted" style="margin-top:8px">If you'd like, I can add direct file references (e.g., <code>Pages/Flashcards/Index.cshtml.cs</code>, <code>Services/GenAiService.cs</code>, <code>Pages/Chat/Index.cshtml.cs</code>) for reviewers to jump straight to the code.</p>
+  </section>
+
+  <!-- TEAM -->
+  <section class="card" id="team">
+    <h3 class="section-title">Team & Contributors</h3>
+
+    <div class="team-grid">
+      <!-- AJAY -->
+      <div class="team-card">
+        <div class="avatar" style="background:linear-gradient(135deg,#7dd3fc,#60a5fa);">
+          <svg width="44" height="44"><rect width="44" height="44" rx="8" fill="rgba(255,255,255,0.08)"/><text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-family="Inter" font-size="16" font-weight="700" fill="#051725">AA</text></svg>
+        </div>
+        <div class="team-info">
+          <h4>Ajay Anand S</h4>
+          <p class="muted">Backend (Full) & GenAI — <a href="https://github.com/Ajayanands" target="_blank">GitHub</a></p>
+        </div>
+      </div>
+
+      <!-- MAI -->
+      <div class="team-card">
+        <div class="avatar" style="background:linear-gradient(135deg,#fbcfe8,#fda4af);">
+          <svg width="44" height="44"><rect width="44" height="44" rx="8" fill="rgba(255,255,255,0.08)"/><text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-family="Inter" font-size="16" font-weight="700" fill="#051725">MH</text></svg>
+        </div>
+        <div class="team-info">
+          <h4>Mai Hazem</h4>
+          <p class="muted">Team Lead & AI Chatbot Integration — <a href="https://www.linkedin.com/in/mai-hazem-7a5459251/" target="_blank">LinkedIn</a></p>
+        </div>
+      </div>
+
+      <!-- HAYA -->
+      <div class="team-card">
+        <div class="avatar" style="background:linear-gradient(135deg,#fde68a,#fca5a5);">
+          <svg width="44" height="44"><rect width="44" height="44" rx="8" fill="rgba(255,255,255,0.08)"/><text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-family="Inter" font-size="16" font-weight="700" fill="#051725">HZ</text></svg>
+        </div>
+        <div class="team-info">
+          <h4>Haya Zaheer</h4>
+          <p class="muted">Frontend — <a href="https://www.linkedin.com/in/haya-zaheer-715b871b0/" target="_blank">LinkedIn</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Ajay Anand & collaborators
+  </footer>
+
+</div>
+</body>
+</html>
